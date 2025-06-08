@@ -2,6 +2,8 @@
 
 namespace Mohachi\CommandLine\SyntaxTree;
 
+use Mohachi\CommandLine\Exception\OutOfBoundsException;
+
 trait IteratorTrait
 {
     
@@ -14,6 +16,11 @@ trait IteratorTrait
     
     public function offsetGet(mixed $offset): mixed
     {
+        if( ! $this->offsetExists($offset) )
+        {
+            throw new OutOfBoundsException();
+        }
+        
         return $this->nodes[$offset];
     }
     
